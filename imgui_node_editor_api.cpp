@@ -163,6 +163,11 @@ void ax::NodeEditor::Group(const ImVec2& size)
     s_Editor->GetNodeBuilder().Group(size);
 }
 
+void ax::NodeEditor::ForceGroup(const ImVec2& size)
+{
+    s_Editor->GetNodeBuilder().ForceGroup(size);
+}
+
 void ax::NodeEditor::EndNode()
 {
     s_Editor->GetNodeBuilder().End();
