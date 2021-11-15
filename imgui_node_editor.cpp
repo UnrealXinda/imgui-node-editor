@@ -4936,6 +4936,19 @@ void ed::NodeBuilder::Group(const ImVec2& size)
     m_GroupBounds.Floor();
 }
 
+void ed::NodeBuilder::ForceGroup(const ImVec2& size)
+{
+    IM_ASSERT(nullptr != m_CurrentNode);
+    IM_ASSERT(nullptr == m_CurrentPin);
+    IM_ASSERT(false   == m_IsGroup);
+
+    m_IsGroup = true;
+    ImGui::Dummy(size);
+
+    m_GroupBounds = ImGui_GetItemRect();
+    m_GroupBounds.Floor();
+}
+
 ImDrawList* ed::NodeBuilder::GetUserBackgroundDrawList() const
 {
     return GetUserBackgroundDrawList(m_CurrentNode);

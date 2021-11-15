@@ -1163,6 +1163,7 @@ struct NodeBuilder
     void PinPivotAlignment(const ImVec2& alignment);
 
     void Group(const ImVec2& size);
+    void ForceGroup(const ImVec2& size);
 
     ImDrawList* GetUserBackgroundDrawList() const;
     ImDrawList* GetUserBackgroundDrawList(Node* node) const;
