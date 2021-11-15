@@ -246,7 +246,6 @@ void PinPivotScale(const ImVec2& scale);
 void PinPivotAlignment(const ImVec2& alignment);
 void EndPin();
 void Group(const ImVec2& size);
-void ForceGroup(const ImVec2& size);
 void EndNode();
 
 bool BeginGroupHint(NodeId nodeId);
