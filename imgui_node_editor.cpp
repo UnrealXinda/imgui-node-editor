@@ -1330,19 +1330,21 @@ void ed::EditorContext::End()
 
         drawList->ChannelsSetCurrent(c_UserChannel_Grid);
 
+        auto& editorStyle = NodeEditor::GetStyle();
         ImVec2 offset    = m_Canvas.ViewOrigin() * (1.0f / m_Canvas.ViewScale());
         ImU32 GRID_COLOR = GetColor(StyleColor_Grid, ImClamp(m_Canvas.ViewScale() * m_Canvas.ViewScale(), 0.0f, 1.0f));
-        float GRID_SX    = 32.0f;// * m_Canvas.ViewScale();
-        float GRID_SY    = 32.0f;// * m_Canvas.ViewScale();
+        float GRID_SX    = editorStyle.GridSize.x;// * m_Canvas.ViewScale();
+        float GRID_SY    = editorStyle.GridSize.y;// * m_Canvas.ViewScale();
+        float THICKNESS  = editorStyle.GridLineThickness;// * m_Canvas.ViewScale();
         ImVec2 VIEW_POS  = m_Canvas.ViewRect().Min;
         ImVec2 VIEW_SIZE = m_Canvas.ViewRect().GetSize();
 
         drawList->AddRectFilled(VIEW_POS, VIEW_POS + VIEW_SIZE, GetColor(StyleColor_Bg));
 
         for (float x = fmodf(offset.x, GRID_SX); x < VIEW_SIZE.x; x += GRID_SX)
-            drawList->AddLine(ImVec2(x, 0.0f) + VIEW_POS, ImVec2(x, VIEW_SIZE.y) + VIEW_POS, GRID_COLOR);
+            drawList->AddLine(ImVec2(x, 0.0f) + VIEW_POS, ImVec2(x, VIEW_SIZE.y) + VIEW_POS, GRID_COLOR, THICKNESS);
         for (float y = fmodf(offset.y, GRID_SY); y < VIEW_SIZE.y; y += GRID_SY)
-            drawList->AddLine(ImVec2(0.0f, y) + VIEW_POS, ImVec2(VIEW_SIZE.x, y) + VIEW_POS, GRID_COLOR);
+            drawList->AddLine(ImVec2(0.0f, y) + VIEW_POS, ImVec2(VIEW_SIZE.x, y) + VIEW_POS, GRID_COLOR, THICKNESS);
     }
 # endif
 

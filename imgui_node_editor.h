@@ -164,6 +164,8 @@ struct Style
     float   GroupRounding;
     float   GroupBorderWidth;
     ImVec4  Colors[StyleColor_Count];
+    ImVec2  GridSize;
+    float   GridLineThickness;
 
     Style()
     {
@@ -190,6 +192,8 @@ struct Style
         PinArrowWidth           = 0.0f;
         GroupRounding           = 6.0f;
         GroupBorderWidth        = 1.0f;
+        GridSize                = ImVec2{32.0f, 32.0f};
+        GridLineThickness       = 1.0f;
 
         Colors[StyleColor_Bg]                 = ImColor( 60,  60,  70, 200);
         Colors[StyleColor_Grid]               = ImColor(120, 120, 120,  40);
