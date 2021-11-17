@@ -1011,6 +1011,7 @@ ed::EditorContext::EditorContext(const ax::NodeEditor::Config* config)
     : m_IsFirstFrame(true)
     , m_IsWindowActive(false)
     , m_ShortcutsEnabled(true)
+    , m_MultipleSelectionEnabled(true)
     , m_Style()
     , m_Nodes()
     , m_Pins()
@@ -1981,6 +1982,16 @@ void ed::EditorContext::EnableShortcuts(bool enable)
 bool ed::EditorContext::AreShortcutsEnabled()
 {
     return m_ShortcutsEnabled;
+}
+
+void ed::EditorContext::EnableMultipleSelection(bool enabled)
+{
+    m_MultipleSelectionEnabled = enabled;
+}
+
+bool ed::EditorContext::IsMultipleSelectionEnabled()
+{
+    return m_MultipleSelectionEnabled;
 }
 
 ed::Control ed::EditorContext::BuildControl(bool allowOffscreen)
@@ -3560,13 +3571,15 @@ ed::EditorAction::AcceptResult ed::SelectAction::Accept(const Control& control)
     if (m_IsActive)
         return False;
 
+    const auto multiSelectionEnabled = Editor->IsMultipleSelectionEnabled();
+
     auto& io = ImGui::GetIO();
     m_SelectGroups   = io.KeyShift;
     m_SelectLinkMode = io.KeyAlt;
 
     m_SelectedObjectsAtStart.clear();
 
-    if (control.BackgroundActive && ImGui::IsMouseDragging(0, 1))
+    if (control.BackgroundActive && ImGui::IsMouseDragging(0, 1) && multiSelectionEnabled)
     {
         m_IsActive = true;
         m_StartPoint = ImGui::GetMousePos();
@@ -3599,7 +3612,7 @@ ed::EditorAction::AcceptResult ed::SelectAction::Accept(const Control& control)
                 Editor->ClearSelection();
             }
 
-            if (io.KeyCtrl)
+            if (io.KeyCtrl && multiSelectionEnabled)
                 Editor->ToggleObjectSelection(clickedObject);
             else
                 Editor->SetSelectedObject(clickedObject);

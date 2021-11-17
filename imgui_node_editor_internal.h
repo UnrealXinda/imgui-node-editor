@@ -1376,6 +1376,9 @@ struct EditorContext
     void EnableShortcuts(bool enable);
     bool AreShortcutsEnabled();
 
+    void EnableMultipleSelection(bool enabled);
+    bool IsMultipleSelectionEnabled();
+
     NodeId GetDoubleClickedNode()      const { return m_DoubleClickedNode;       }
     PinId  GetDoubleClickedPin()       const { return m_DoubleClickedPin;        }
     LinkId GetDoubleClickedLink()      const { return m_DoubleClickedLink;       }
@@ -1409,6 +1412,7 @@ private:
     bool                m_IsWindowActive;
 
     bool                m_ShortcutsEnabled;
+    bool                m_MultipleSelectionEnabled;
 
     Style               m_Style;
 

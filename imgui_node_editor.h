@@ -322,6 +322,9 @@ bool ShowBackgroundContextMenu();
 void EnableShortcuts(bool enable);
 bool AreShortcutsEnabled();
 
+void EnableMultipleSelection(bool enabled);
+bool IsMultipleSelectionEnabled();
+
 bool BeginShortcut();
 bool AcceptCut();
 bool AcceptCopy();

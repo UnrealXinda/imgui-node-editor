@@ -540,6 +540,16 @@ bool ax::NodeEditor::BeginShortcut()
     return s_Editor->GetShortcut().Begin();
 }
 
+void ax::NodeEditor::EnableMultipleSelection(bool enabled)
+{
+    s_Editor->EnableMultipleSelection(enabled);
+}
+
+bool ax::NodeEditor::IsMultipleSelectionEnabled()
+{
+    return s_Editor->IsMultipleSelectionEnabled();
+}
+
 bool ax::NodeEditor::AcceptCut()
 {
     return s_Editor->GetShortcut().AcceptCut();
